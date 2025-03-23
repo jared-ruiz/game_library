@@ -88,7 +88,7 @@ function SignUp() {
           {/* Login Link */}
 
           <div className="text-center text-white">
-            Already have an account?
+            Already Have an Account?
             <Link to={"/login"}>
               <h2 className="text-blue-400 font-semibold hover:underline">
                 Login

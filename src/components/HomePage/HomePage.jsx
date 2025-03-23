@@ -3,7 +3,7 @@ import AuthScreen from "../AuthScreen/AuthScreen";
 import HomeScreen from "../HomeScreen/HomeScreen";
 
 function HomePage() {
-  const user = true;
+  const user = false;
 
   return (
     <>

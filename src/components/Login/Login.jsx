@@ -64,7 +64,7 @@ function Login() {
                 onChange= {(e) => setPassword(e.target.value)}/>
             </div>
 
-            <button className="w-full py-2 bg-white font-semibold rounded-md hover:bg-gray-400">
+            <button className="w-full py-2 bg-white font-semibold rounded-md hover:bg-blue-400">
               Login
             </button>
           </form>
