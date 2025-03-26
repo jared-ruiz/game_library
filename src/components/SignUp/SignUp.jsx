@@ -14,10 +14,10 @@ function SignUp() {
   }
 
   return (
-    <div className="h-screen w-full flex flex-col app_bg">
+    <div className="h-screen w-full flex flex-col app_bg font-[Poppins]">
       <header className="max-w-6xl w-full mx-auto flex items-center justify-between p-4 bg-black/40">
         <Link to={"/"}>
-          <p className="text-white text-2xl">Game Library</p>
+          <p className="text-white text-2xl font-bold">Game Library</p>
         </Link>
       </header>
 
