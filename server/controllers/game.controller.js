@@ -25,13 +25,13 @@ export async function fetchGameDetails(req, res) {
             }
         );
 
-        const games = response.data;
+        const game = response.data;
         
-        if (games.length === 0) {
+        if (game.length === 0) {
             return res.status(404).json({ message: 'Game not found.' });
         }
 
-        res.json({success: true, content: games[0]});
+        res.json({success: true, content: game[0]});
     } catch (error) {
         console.error('Error fetching game data:', error.response?.data || error.message);
         res.status(500).json({ error: 'Failed to fetch game data.' });

@@ -3,17 +3,18 @@ import authRoutes from './routes/auth.route.js';
 import gameRoutes from './routes/game.route.js';
 import { ENV_VARS } from './config/envVars.js';
 import { connectDB } from './config/db.js'
-
-
+import cookieParser from 'cookie-parser';
+import { protectRoute } from './middleware/protectRoute.js';
 
 const app = express();
 
 const PORT = ENV_VARS.PORT;
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/game", gameRoutes)
+app.use("/api/v1/game", protectRoute, gameRoutes)
 
 
 console.log("MONGO_URI: ", process.env.MONGO_URI);
