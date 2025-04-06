@@ -5,6 +5,7 @@ import { ENV_VARS } from './config/envVars.js';
 import { connectDB } from './config/db.js'
 import cookieParser from 'cookie-parser';
 import { protectRoute } from './middleware/protectRoute.js';
+import searchRoutes from './routes/searchRoutes.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cookieParser())
 
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/game", protectRoute, gameRoutes)
+app.use("/api/v1/search", protectRoute, searchRoutes)
 
 
 console.log("MONGO_URI: ", process.env.MONGO_URI);
