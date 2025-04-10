@@ -16,7 +16,7 @@ export async function searchGame(req, res) {
 
         const response = await axios.post(
             "https://api.igdb.com/v4/search",
-            `fields company,description,game,name,platform,published_at; search "${query}";`,
+            `fields company,description,game,name,platform,published_at; search "${query}"; limit 25;`,
             {
                 headers: {
                     'Client-ID': ENV_VARS.LIB_ID,
