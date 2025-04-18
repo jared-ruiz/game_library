@@ -38,19 +38,14 @@ export async function fetchGameDetails(req, res) {
     }
 }
 
-//takes the 100 games, outputs 10 randomly selected ones for viewing
-function getRandomItems(arr, numItems) {
-    const shuffledItems = [...arr].sort(() => 0.5 - Math.random());
-    return shuffledItems.slice(0, numItems);
-}
-
-export async function fetchRandomGames(req, res) {
+// pulls the top 10 most popular games based on the 24 update cycle this api provides
+export async function fetchTopTen(req, res) {
     try {
         const token = await getAccessToken();
 
         const response = await axios.post(
-            'https://api.igdb.com/v4/games', 
-            `fields name, summary, first_release_date, rating, cover.url; limit 100;`,
+            'https://api.igdb.com/v4/popularity_primitives', 
+            `fields game_id,value,popularity_type; sort value desc; limit 10; where popularity_type = 1;`,
             {
                 headers: {
                     'Client-ID': ENV_VARS.LIB_ID,
@@ -67,10 +62,23 @@ export async function fetchRandomGames(req, res) {
             return res.status(404).json({ message: 'Game not found.' });
         }
 
-        //get random games from set
-        const randomGames = getRandomItems(games, 10);
+        const gameIds = games.map(g => g.game_id);
 
-        res.json({success: true, content: randomGames});
+        const gameIdResponse = await axios.post(
+            'https://api.igdb.com/v4/games',
+            `fields name, cover.url; where id = (${gameIds.join(',')});`,
+            {
+                headers: {
+                    'Client-ID': ENV_VARS.LIB_ID,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'text/plain'
+                }
+            }
+        );
+        
+        const popularGames = gameIdResponse.data;
+
+        res.json({success: true, content: popularGames});
         
     } catch (error) {
         console.error('Error fetching game data:', error.response?.data || error.message);
