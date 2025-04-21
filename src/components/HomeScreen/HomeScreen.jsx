@@ -1,14 +1,13 @@
-import { useAuthStore } from "../../store/authUser";
-
+import Navbar from '../Navbar/Navbar.jsx';
 
 function HomeScreen() {
-  const { logout } = useAuthStore();
   return (
-    <div>
-      <p>Home Screen</p>
-      <button onClick={logout}>Logout</button>
-    </div>
-  )
+    <>
+      <div className="h-screen w-full flex flex-col app_bg font-[poppins]">
+        <Navbar />
+      </div>
+    </>
+  );
 }
 
 export default HomeScreen;
