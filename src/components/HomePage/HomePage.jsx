@@ -1,9 +1,10 @@
 import React from "react";
 import AuthScreen from "../AuthScreen/AuthScreen";
 import HomeScreen from "../HomeScreen/HomeScreen";
+import { useAuthStore } from "../../store/authUser";
 
 function HomePage() {
-  const user = false;
+  const { user } = useAuthStore();
 
   return (
     <>
